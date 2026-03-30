@@ -1,4 +1,4 @@
-package com.example.demo3;
+package com.example.demo3._Constantes;
 
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
@@ -13,17 +13,17 @@ public final class Constantes {
     //Joystick
     public static final Point2D JOYSTICK_CENTER = new Point2D(SCREEN_WIDTH /2, HALF_HEIGHT *5/3);
     public static final double JOYSTICK_RAYON = SCREEN_WIDTH /4;
-    public static final Color JOYSTICK_COULEUR = Color.gray(20);
+    public static final Color JOYSTICK_COULEUR = Color.gray(0.8);
     //Curseur
     public static final double RAYON_CURSEUR = JOYSTICK_RAYON /2;
-    public static final Color CURSEUR_COULEUR = Color.gray(80);
+    public static final Color CURSEUR_COULEUR = Color.gray(0.2);
     //Zones du joystick
     public static final double EPAISSEUR_ZONES_JOYSTICK = RAYON_CURSEUR;
     public static final double longueurZonesJoystick = JOYSTICK_RAYON;
 
     public static final double DIMENSIONS_ZONES_GIAGONALES = JOYSTICK_RAYON - EPAISSEUR_ZONES_JOYSTICK /2;
 
-    //Prob not gonna be used
+    // not gonna be used
 //    public static final Point2D zoneA = new Point2D(JOYSTICK_CENTER.getX()- EPAISSEUR_ZONES_JOYSTICK /2, JOYSTICK_CENTER.getY()-longueurZonesJoystick);
 //    public static final Point2D zoneADimensions = new Point2D(EPAISSEUR_ZONES_JOYSTICK, longueurZonesJoystick);
 //    public static final Point2D zoneB = new Point2D(JOYSTICK_CENTER.getX(), JOYSTICK_CENTER.getY()- EPAISSEUR_ZONES_JOYSTICK /2);
@@ -54,4 +54,6 @@ public final class Constantes {
     public static final double IMAGE_X = (SCREEN_WIDTH/2)- IMAGE_WIDTH/2;
     public static final double IMAGE_Y= (HALF_HEIGHT/2)- IMAGE_HEIGHT/2;
 
+    // Misc
+    public static final double INTERVALLE_SEND = 100;
 }

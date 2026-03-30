@@ -6,4 +6,6 @@ module com.example.demo3 {
 
     opens com.example.demo3 to javafx.fxml;
     exports com.example.demo3;
+    exports com.example.demo3._Constantes;
+    opens com.example.demo3._Constantes to javafx.fxml;
 }

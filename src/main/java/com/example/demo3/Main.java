@@ -1,11 +1,13 @@
 package com.example.demo3;
 
+import com.example.demo3._Constantes.Constantes;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -16,13 +18,13 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        var menu = new Interface();
+        var menu = new InterfaceApplication();
         var pane = new Pane();
         Scene scene = new Scene(pane, Constantes.SCREEN_WIDTH, Constantes.SCREEN_HEIGHT);
         var canva = new Canvas(Constantes.SCREEN_WIDTH, Constantes.SCREEN_HEIGHT);
         pane.getChildren().add(canva);
 
-        var contexte = getGraphicsContext(canva);
+        var contexte = canva.getGraphicsContext2D();
 
 
 //
@@ -31,11 +33,13 @@ public class Main extends Application {
 
         scene.addEventFilter(TouchEvent.ANY, menu::handleInputs);
 
+        scene.addEventFilter(MouseEvent.ANY, menu::handleInputs);
+
 
         var timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                menu.update();
+                menu.update(contexte);
             }
         };
         timer.start();

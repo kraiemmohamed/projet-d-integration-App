@@ -2,8 +2,6 @@ package com.example.demo3.Bas;
 
 import com.example.demo3.Affichable;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
-import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Boutton implements Appuyable, Affichable{
     protected boolean active = false;

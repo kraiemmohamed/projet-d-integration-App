@@ -1,17 +1,17 @@
 package com.example.demo3.Bas;
 
 import com.example.demo3.Affichable;
-import com.example.demo3.Constantes;
+import com.example.demo3._Constantes.Constantes;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class BouttonCompartiment extends Boutton implements Affichable {
     final Rectangle boutton;
 
-    Point2D position = Constantes.COMPARTIMENT_COORDONNEES;
-    double largeur = Constantes.COMPARTIMENT_DIMENSIONS.getX();
-    double hauteur = Constantes.COMPARTIMENT_DIMENSIONS.getY();
+    double largeur;
+    double hauteur;
 
     public BouttonCompartiment(Point2D position, Point2D dimensions){
         this.position = position;
@@ -47,6 +47,10 @@ public class BouttonCompartiment extends Boutton implements Affichable {
 
     @Override
     public void afficher(GraphicsContext gc) {
+        gc.setFill(getActive()? Color.GREEN : Color.RED);
+        gc.fillRect(position.getX(), position.getY(), largeur, hauteur);
 
+        gc.setStroke(Color.BLACK);
+        gc.strokeRect(position.getX(), position.getY(), largeur, hauteur);
     }
 }
