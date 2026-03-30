@@ -49,7 +49,7 @@ public class Joystick extends Boutton implements Affichable {
         else if (distancePercent<0.4) return 20;
         else if (distancePercent<0.6) return 40;
         else if (distancePercent<0.8) return 60;
-        else if (distancePercent<1) return 80;
+        else if (distancePercent<0.99) return 80;
         else return 100;
     }
 

@@ -10,6 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -108,6 +109,9 @@ public class InterfaceApplication {
 
     //AFFICHER
     public void afficherInterface(GraphicsContext gc){
+        gc.setFill(Color.WHITE);
+        gc.fillRect(0,Constantes.HALF_HEIGHT, Constantes.SCREEN_WIDTH, Constantes.SCREEN_HEIGHT);
+
         for (var i : affichables) i.afficher(gc);
     }
 
