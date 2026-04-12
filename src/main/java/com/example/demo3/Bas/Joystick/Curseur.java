@@ -34,7 +34,7 @@ public class Curseur implements Affichable{
     }
 
     public Zone detecterZone(){
-        if (distanceCentre < distanceLimite*0.2) return Zone.STATIONARY;
+        if (distanceCentre < distanceLimite*0.2) return Zone.S;
         else {
             Point2D deplacement = position.subtract(origine);
             double dx = deplacement.getX();

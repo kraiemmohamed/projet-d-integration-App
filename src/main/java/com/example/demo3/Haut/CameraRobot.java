@@ -7,9 +7,11 @@ import javafx.scene.image.Image;
 import javafx.scene.text.TextAlignment;
 
 public class CameraRobot implements Affichable {
-    Image image = new Image("No_Images.png");
-    double temperature = 0;
-    double humidite = 0;
+    volatile Image image = new Image("No_Images.png");
+    volatile double temperature = 0;
+    volatile double humidite = 0;
+
+    Image replacementImage = new Image("No_Images.png");
 
     public CameraRobot(){}
 
@@ -22,11 +24,9 @@ public class CameraRobot implements Affichable {
 
     @Override
     public void afficher(GraphicsContext gc){
-        try {
-            afficherImage(gc);
-        } catch (Exception e) {
-            afficherErreur(gc);
-        }
+        if (image != null) afficherImage(gc);
+        else afficherErreur(gc);
+
 
         gc.setTextAlign(TextAlignment.RIGHT);
         gc.fillText(humidite + "%", Constantes.POSITION_HUMIDITE.getX(),Constantes.POSITION_HUMIDITE.getY());
@@ -46,7 +46,6 @@ public class CameraRobot implements Affichable {
 
     private void afficherErreur(GraphicsContext gc) {
         // Centralise l'image au milieu de la partie haute de l'écran
-        Image replacementImage = new Image("No_Images.png");
         double imageWidth = replacementImage.getWidth();
         double imageHeight = replacementImage.getHeight();
         double imageX = (Constantes.SCREEN_WIDTH/2) - (imageWidth/2);

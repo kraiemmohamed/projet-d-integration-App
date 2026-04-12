@@ -11,8 +11,8 @@ public final class Constantes {
     public static final double HALF_HEIGHT = SCREEN_HEIGHT /2;
 
     //Joystick
-    public static final Point2D JOYSTICK_CENTER = new Point2D(SCREEN_WIDTH /2, HALF_HEIGHT *5/3);
-    public static final double JOYSTICK_RAYON = SCREEN_WIDTH /4;
+    public static final Point2D JOYSTICK_CENTER = new Point2D(SCREEN_WIDTH /2, HALF_HEIGHT *1.65);
+    public static final double JOYSTICK_RAYON = SCREEN_WIDTH /3;
     public static final Color JOYSTICK_COULEUR = Color.gray(0.8);
     //Curseur
     public static final double RAYON_CURSEUR = JOYSTICK_RAYON /2;

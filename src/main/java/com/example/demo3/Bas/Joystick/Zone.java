@@ -9,5 +9,5 @@ public enum Zone {
     F,
     G,
     H,
-    STATIONARY
+    S   //Stationary
 }

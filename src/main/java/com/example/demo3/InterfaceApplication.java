@@ -37,6 +37,29 @@ public class InterfaceApplication {
         affichables.add(joystick);
         affichables.add(bouttonCompartiment);
         affichables.add(camera);
+
+        startCommunicationThread();
+    }
+
+    private void startCommunicationThread() {
+        Thread communicateur = new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    send();
+                    //receive();
+
+                    Thread.sleep(100); // 10 times per second
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt(); // restore flag
+                    break; // exit loop
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        communicateur.setDaemon(true); // stops when app closes
+        communicateur.start();
     }
 
     public void handleInputs(TouchEvent event){
@@ -79,24 +102,20 @@ public class InterfaceApplication {
         }
     }
 
+    // UPDATE
     public void update(GraphicsContext gc){
-        long now = System.currentTimeMillis();
-
-        if (now - tempDepuisEnvoi >=Constantes.INTERVALLE_SEND){
-            send();
-            tempDepuisEnvoi = now;
-        }
-        //receive();
         afficherInterface(gc);
     }
 
     // SEND
     public void send(){
+        HttpSender.sendCommand(sendZone().name() + sendVitesse() + sendEtatCompartiment());
         System.out.println("Ouverture du boutton compartiment: " + sendEtatCompartiment());
         System.out.println("Déplacement du robot: " + sendVitesse() +
                 "% dans la zone " + sendZone());
         System.out.println();
     }
+
     public boolean sendEtatCompartiment(){
         return bouttonCompartiment.getActive();
     }

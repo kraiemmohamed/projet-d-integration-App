@@ -12,7 +12,7 @@ public class Joystick extends Boutton implements Affichable {
     //    final Circle contour;
     final Point2D position;
     double rayon;
-    Zone zone = Zone.STATIONARY;
+    Zone zone = Zone.S;
 
     Curseur curseur;
 
@@ -46,11 +46,11 @@ public class Joystick extends Boutton implements Affichable {
         double distancePercent = curseur.distanceCentre/curseur.distanceLimite;
 
         if (distancePercent<0.2) return 0;
-        else if (distancePercent<0.4) return 20;
-        else if (distancePercent<0.6) return 40;
-        else if (distancePercent<0.8) return 60;
-        else if (distancePercent<0.99) return 80;
-        else return 100;
+        else if (distancePercent<0.4) return 51;
+        else if (distancePercent<0.6) return 102;
+        else if (distancePercent<0.8) return 153;
+        else if (distancePercent<0.99) return 204;
+        else return 255;
     }
 
 
@@ -76,7 +76,7 @@ public class Joystick extends Boutton implements Affichable {
     public void relache(){
         curseur.resetCurseur();
         super.relache();
-        zone = Zone.STATIONARY;
+        zone = Zone.S;
     }
 
     @Override
