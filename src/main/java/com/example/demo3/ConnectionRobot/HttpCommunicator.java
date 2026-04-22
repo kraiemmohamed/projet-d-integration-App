@@ -1,15 +1,28 @@
-package com.example.demo3;
+package com.example.demo3.ConnectionRobot;
 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class HttpSender {
-    private static final String SERVER_URL = "http://192.168.1.141:5000/command"; // CHANGE THIS
-    private static final HttpClient client = HttpClient.newHttpClient();
+import java.io.PrintWriter;
+import java.net.Socket;
 
-    public static void sendCommand(String command) {
+
+public class HttpCommunicator {
+    private String SERVER_URL; // CHANGE THIS
+    private final HttpClient client = HttpClient.newHttpClient();
+
+    public HttpCommunicator(String URL){
+        SERVER_URL = URL;
+    }
+
+    public void setURL(String URL){
+        SERVER_URL = URL;
+    }
+
+    public void sendCommand(String command) {
+
 
         try {
 

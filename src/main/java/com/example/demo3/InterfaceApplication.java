@@ -1,9 +1,10 @@
 package com.example.demo3;
 
 import com.example.demo3.Bas.Boutton;
-import com.example.demo3.Bas.BouttonCompartiment;
+import com.example.demo3.Bas.BouttonApp;
 import com.example.demo3.Bas.Joystick.Joystick;
 import com.example.demo3.Bas.Joystick.Zone;
+import com.example.demo3.ConnectionRobot.HttpCommunicator;
 import com.example.demo3.Haut.CameraRobot;
 import com.example.demo3._Constantes.Constantes;
 import javafx.scene.canvas.GraphicsContext;
@@ -16,26 +17,44 @@ import java.util.ArrayList;
 
 public class InterfaceApplication {
     CameraRobot camera;
-    BouttonCompartiment bouttonCompartiment;
+    BouttonApp bouttonCompartiment;
+    BouttonApp bouttonLampe;
     Joystick joystick;
 
     ArrayList<Boutton> bouttons = new ArrayList<>();
     ArrayList<Affichable> affichables = new ArrayList<>();
 
-    public InterfaceApplication(){
+    HttpCommunicator communicator;
+
+    public InterfaceApplication() throws Exception {
         camera = new CameraRobot();
         joystick = new Joystick(Constantes.JOYSTICK_CENTER, Constantes.JOYSTICK_RAYON,Constantes.RAYON_CURSEUR);
-        bouttonCompartiment = new BouttonCompartiment(Constantes.COMPARTIMENT_COORDONNEES, Constantes.COMPARTIMENT_DIMENSIONS);
+        bouttonCompartiment = new BouttonApp(Constantes.COMPARTIMENT_COORDONNEES,
+                Constantes.COMPARTIMENT_DIMENSIONS,
+                Constantes.COMPARTIMENT_COLOR_CLOSED,
+                Constantes.COMPARTIMENT_COLOR_OPENED);
+        bouttonLampe = new BouttonApp(Constantes.LAMPE_COORDONNEES,
+                Constantes.LAMPE_DIMENSIONS,
+                Constantes.LAMPE_COLOR_CLOSED,
+                Constantes.LAMPE_COLOR_OPENED);
+
+        communicator = new HttpCommunicator("http://192.168.1.118:5000/command");
 
 
-        bouttons.add(joystick);
         bouttons.add(bouttonCompartiment);
+        bouttons.add(bouttonLampe);
+        bouttons.add(joystick);
 
-        affichables.add(joystick);
         affichables.add(bouttonCompartiment);
         affichables.add(camera);
+        affichables.add(bouttonLampe);
+        affichables.add(joystick);
 
         startCommunicationThread();
+    }
+
+    public void setCommunicatorURL(String URL){
+        communicator.setURL(URL);
     }
 
     private void startCommunicationThread() {
@@ -43,7 +62,7 @@ public class InterfaceApplication {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
                     send();
-                    //receive();
+                 //   receive();
 
                     Thread.sleep(Constantes.INTERVALLE_SEND);
                 } catch (InterruptedException e) {
@@ -106,21 +125,22 @@ public class InterfaceApplication {
 
     // SEND
     public void send(){
-     //   HttpSender.sendCommand(sendZone().name() + sendVitesse() + sendEtatCompartiment());
-        System.out.println("Ouverture du boutton compartiment: " + sendEtatCompartiment());
-        System.out.println("Déplacement du robot: " + sendVitesse() +
-                "% dans la zone " + sendZone());
+        communicator.sendCommand(sendZone().name() + "," + sendVitesse() + "," + sendEtatCompartiment() + "," + sendEtatLampe() + ",");
+        System.out.println(sendZone().name() + "," + sendVitesse() + "," + sendEtatCompartiment() + "," + sendEtatLampe());
         System.out.println();
     }
 
-    public boolean sendEtatCompartiment(){
-        return bouttonCompartiment.getActive();
+    public Zone sendZone(){
+        return joystick.getZone();
     }
     public int sendVitesse(){
         return joystick.getDistance();
     }
-    public Zone sendZone(){
-        return joystick.getZone();
+    public boolean sendEtatCompartiment(){
+        return bouttonCompartiment.getActive();
+    }
+    public String sendEtatLampe(){
+        return bouttonLampe.getActive()? "O" : "P";
     }
 
     //AFFICHER
@@ -132,8 +152,7 @@ public class InterfaceApplication {
     }
 
     //RECEIVE
-    public void receive(Image image, int temp, int hum){
-
-        camera.setParameters(image,temp,hum);
+    public void receive(Image image){
+        camera.setParameters(image);
     }
 }

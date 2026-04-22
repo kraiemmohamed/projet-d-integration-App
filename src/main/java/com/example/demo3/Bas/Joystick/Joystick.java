@@ -44,13 +44,7 @@ public class Joystick extends Boutton implements Affichable {
 
     public int getDistance(){
         double distancePercent = curseur.distanceCentre/curseur.distanceLimite;
-
-        if (distancePercent<0.2) return 0;
-        else if (distancePercent<0.4) return 51;
-        else if (distancePercent<0.6) return 102;
-        else if (distancePercent<0.8) return 153;
-        else if (distancePercent<0.99) return 204;
-        else return 255;
+        return (int) (distancePercent*255);
     }
 
 
@@ -63,6 +57,7 @@ public class Joystick extends Boutton implements Affichable {
     public boolean detecterInput(double x, double y) {
         if(position.distance(x,y) < rayon){
             active = true;
+            curseur.deplacerCurseur(x,y);
             return true;
         }
         else return false;

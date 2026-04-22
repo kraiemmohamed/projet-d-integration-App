@@ -7,21 +7,39 @@ import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class Main extends Application {
+    boolean appliStart = false;
+    String IP = null;
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws Exception {
         var menu = new InterfaceApplication();
         var pane = new Pane();
         Scene scene = new Scene(pane, Constantes.SCREEN_WIDTH, Constantes.SCREEN_HEIGHT);
         var canva = new Canvas(Constantes.SCREEN_WIDTH, Constantes.SCREEN_HEIGHT);
+//
+//        var ligne = new HBox();
+//        var txt = new Text("Entrez l'adresse IP:");
+//        var txtBox = new TextField();
+//        var bouttonStrart = new Button("Connecter");
+//        ligne.getChildren().addAll(txt, txtBox);
+//        bouttonStrart.setOnAction(actionEvent -> {
+//            IP = txtBox.getText();
+//        });
+//
+
         pane.getChildren().add(canva);
 
         var contexte = canva.getGraphicsContext2D();

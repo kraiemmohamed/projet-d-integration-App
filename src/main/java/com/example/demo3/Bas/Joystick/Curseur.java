@@ -18,7 +18,7 @@ public class Curseur implements Affichable{
         this.origine = origine;
         position = new Point2D(origine.getX(),origine.getY());
         this.rayon = rayon;
-        distanceLimite = rayonJoystick;
+        distanceLimite = rayonJoystick-rayon;
     }
 
     public void deplacerCurseur(double x, double y){
@@ -34,7 +34,7 @@ public class Curseur implements Affichable{
     }
 
     public Zone detecterZone(){
-        if (distanceCentre < distanceLimite*0.2) return Zone.S;
+        if (distanceCentre < distanceLimite*0.1) return Zone.S;
         else {
             Point2D deplacement = position.subtract(origine);
             double dx = deplacement.getX();

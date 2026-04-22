@@ -7,20 +7,34 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class BouttonCompartiment extends Boutton implements Affichable {
+public class BouttonApp extends Boutton implements Affichable {
     final Rectangle boutton;
 
     double largeur;
     double hauteur;
 
-    public BouttonCompartiment(Point2D position, Point2D dimensions){
+    Color couleurFerme;
+    Color couleurOuvert;
+
+    public BouttonApp(Point2D position, Point2D dimensions){
         this.position = position;
         largeur = dimensions.getX();
         hauteur = dimensions.getY();
+        couleurFerme = Color.RED;
+        couleurOuvert = Color.GREEN;
 
         this.boutton = new Rectangle(position.getX(),position.getY(), dimensions.getX(),dimensions.getY());
     }
 
+    public BouttonApp(Point2D position, Point2D dimensions, Color closed, Color opened){
+        this.position = position;
+        largeur = dimensions.getX();
+        hauteur = dimensions.getY();
+        couleurFerme = closed;
+        couleurOuvert = opened;
+
+        this.boutton = new Rectangle(position.getX(),position.getY(), dimensions.getX(),dimensions.getY());
+    }
 
     public boolean getActive(){
         return active;
@@ -47,7 +61,7 @@ public class BouttonCompartiment extends Boutton implements Affichable {
 
     @Override
     public void afficher(GraphicsContext gc) {
-        gc.setFill(getActive()? Color.GREEN : Color.RED);
+        gc.setFill(getActive()? couleurOuvert : couleurFerme);
         gc.fillRect(position.getX(), position.getY(), largeur, hauteur);
 
         gc.setStroke(Color.BLACK);
