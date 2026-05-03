@@ -6,7 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-public class CameraRobot implements Affichable {
+public class CameraRobot implements Affichable{
     volatile Image image = new Image("No_Images.png");
 
     Image replacementImage = new Image("No_Images.png");
@@ -17,15 +17,40 @@ public class CameraRobot implements Affichable {
         this.image = img;
     }
 
+    public void startStream(String url) {
+        Thread afficheurCamera = new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                long tempsInitial = System.currentTimeMillis();
+                try {
+                    Image img = new Image(url + ":8080/frame", false);
 
-    @Override
+                    if (!img.isError() && img.getWidth() !=0) image = img;
+
+                    long deltaTemps = System.currentTimeMillis() - tempsInitial;
+                    long delay = Math.max(0, 50 - deltaTemps);
+
+                    Thread.sleep(delay);
+
+//                    System.out.println("Frame time: " + deltaTemps);
+                } catch (Exception e) {
+                    image = replacementImage;
+                }
+            }
+        });
+
+        afficheurCamera.setDaemon(true);
+        afficheurCamera.start();
+    }
+
     public void afficher(GraphicsContext gc){
         gc.setFill(Color.GRAY);
         gc.fillRect(0,0, Constantes.SCREEN_WIDTH, Constantes.HALF_HEIGHT);
-
-        Image newImage = image;
-        if (newImage == null || newImage.getHeight() == 0 || newImage.getWidth() == 0) newImage = replacementImage;
-        afficherImage(gc,newImage);
+        Image img = image;
+        if (img == null || img.getHeight() == 0 || img.getWidth() == 0) img = replacementImage;
+        try {
+            afficherImage(gc,img);
+        } catch (Exception ignored){
+        }
     }
 
     private void afficherImage(GraphicsContext gc, Image img) {

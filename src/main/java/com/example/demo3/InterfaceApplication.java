@@ -13,9 +13,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class InterfaceApplication {
+    final String URL;
+
+    volatile boolean connected = false;
     CameraRobot camera;
     BouttonApp bouttonCompartiment;
     BouttonApp bouttonLampe;
@@ -26,7 +30,7 @@ public class InterfaceApplication {
 
     HttpCommunicator communicator;
 
-    public InterfaceApplication() throws Exception {
+    public InterfaceApplication(HttpCommunicator communicator){
         camera = new CameraRobot();
         joystick = new Joystick(Constantes.JOYSTICK_CENTER, Constantes.JOYSTICK_RAYON,Constantes.RAYON_CURSEUR);
         bouttonCompartiment = new BouttonApp(Constantes.COMPARTIMENT_COORDONNEES,
@@ -38,7 +42,8 @@ public class InterfaceApplication {
                 Constantes.LAMPE_COLOR_CLOSED,
                 Constantes.LAMPE_COLOR_OPENED);
 
-        communicator = new HttpCommunicator("http://192.168.1.118:5000/command");
+        this.communicator = communicator;
+        URL = communicator.getIP();
 
 
         bouttons.add(bouttonCompartiment);
@@ -46,35 +51,49 @@ public class InterfaceApplication {
         bouttons.add(joystick);
 
         affichables.add(bouttonCompartiment);
-        affichables.add(camera);
         affichables.add(bouttonLampe);
         affichables.add(joystick);
+        affichables.add(camera);
 
+        camera.startStream(URL);
         startCommunicationThread();
     }
 
-    public void setCommunicatorURL(String URL){
-        communicator.setURL(URL);
-    }
+//    public void initializeCommunication(String url) throws IOException, InterruptedException {
+//        communicator = new HttpCommunicator();
+//        startCommunicationThread();
+//    }
+//
+//    public void setCommunicatorURL(String URL) throws IOException, InterruptedException {
+//        communicator.setURL(URL);
+//    }
 
     private void startCommunicationThread() {
         Thread communicateur = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
-                try {
+                try{
                     send();
-                 //   receive();
-
+                    //   receive();
                     Thread.sleep(Constantes.INTERVALLE_SEND);
-                } catch (InterruptedException e) {
+                    connected = true;
+                }
+                catch (IOException e) {
+                        System.out.println("Network error: " + e.getMessage());
+                        connected = false;
+                    }
+                 catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
+                    connected = false;
                     break;
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     e.printStackTrace();
+                    connected = false;
                 }
             }
         });
 
-        communicateur.setDaemon(true); // stops when app closes
+        communicateur.setDaemon(true);
         communicateur.start();
     }
 
@@ -119,15 +138,16 @@ public class InterfaceApplication {
     }
 
     // UPDATE
-    public void update(GraphicsContext gc){
+    public void update(GraphicsContext gc) throws IOException {
         afficherInterface(gc);
+//        send();
     }
 
     // SEND
-    public void send(){
+    public void send() throws IOException, InterruptedException {
         communicator.sendCommand(sendZone().name() + "," + sendVitesse() + "," + sendEtatCompartiment() + "," + sendEtatLampe() + ",");
-        System.out.println(sendZone().name() + "," + sendVitesse() + "," + sendEtatCompartiment() + "," + sendEtatLampe());
-        System.out.println();
+//        System.out.println(sendZone().name() + "," + sendVitesse() + "," + sendEtatCompartiment() + "," + sendEtatLampe());
+//        System.out.println();
     }
 
     public Zone sendZone(){
@@ -149,10 +169,16 @@ public class InterfaceApplication {
         gc.fillRect(0,Constantes.HALF_HEIGHT, Constantes.SCREEN_WIDTH, Constantes.SCREEN_HEIGHT);
 
         for (var i : affichables) i.afficher(gc);
+
+        gc.setFill(connected?  Color.GREEN : Color.RED);
+        gc.fillOval(Constantes.INDICATOR_POSITION.getX() - Constantes.INDICATOR_RAYON,
+                Constantes.INDICATOR_POSITION.getY()-Constantes.INDICATOR_RAYON,
+                Constantes.INDICATOR_RAYON*2,
+                Constantes.INDICATOR_RAYON*2);
     }
 
-    //RECEIVE
-    public void receive(Image image){
-        camera.setParameters(image);
-    }
+//    //RECEIVE
+//    public void receive(Image image){
+//        camera.setParameters(image);
+//    }
 }
