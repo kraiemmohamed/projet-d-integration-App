@@ -31,7 +31,7 @@ public class HttpCommunicator {
         sendCommand("S,0,false,P,");
     }
 
-
+    //Méthode généré par ChatGPT, puis modifié manuellement
     public void sendCommand(String command) throws IOException, InterruptedException {
         if (commandURL == null) return;
 
