@@ -1,7 +1,6 @@
 package com.example.demo3.Bas;
 
 import com.example.demo3.Affichable;
-import com.example.demo3._Constantes.Constantes;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

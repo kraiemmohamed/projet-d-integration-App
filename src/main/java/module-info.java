@@ -3,6 +3,7 @@ module com.example.demo3 {
     requires javafx.fxml;
     requires javafx.graphics;
     requires java.net.http;
+    requires java.desktop;
 
 
     opens com.example.demo3 to javafx.fxml;

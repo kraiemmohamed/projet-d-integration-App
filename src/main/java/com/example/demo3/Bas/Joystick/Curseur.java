@@ -43,26 +43,14 @@ public class Curseur implements Affichable{
             double angle = Math.toDegrees(Math.atan2(dy, dx));
             if (angle < 0) angle += 360;
 
-            if (angle >= 247.5 && angle <= 292.5) return Zone.A;     // up
-            if (angle >= 337.5 || angle <= 22.5) return Zone.B;      // right
-            if (angle >= 67.5 && angle <= 112.5) return Zone.C;      // down
-            if (angle >= 157.5 && angle <= 202.5) return Zone.D;     // left
-            if (angle > 292.5 && angle < 337.5) return Zone.E;     // up-right
-            if (angle > 22.5 && angle < 67.5) return Zone.F;       // down-right
-            if (angle > 112.5 && angle < 157.5) return Zone.G;     // down-left
-            return Zone.H;                                          // up-left
-
-//
-//            if (Math.abs(dx)/distanceCentre < Math.sin(Math.toRadians(20)))
-//                return (dy >= 0? Zone.A:Zone.C);
-//            else if (Math.abs(dy)/distanceCentre < Math.sin(Math.toRadians(20)))
-//                return (dx >= 0? Zone.B:Zone.D);
-//            else if (dx>0 && dy>0) return Zone.E;
-//            else if (dx>0 && dy<0) return Zone.F;
-//            else if (dx<0 && dy<0) return Zone.G;
-//            else return Zone.H;
-//
-
+            if (angle >= 247.5 && angle <= 292.5) return Zone.A;     // avant
+            if (angle >= 337.5 || angle <= 22.5) return Zone.B;      // droite
+            if (angle >= 67.5 && angle <= 112.5) return Zone.C;      // derrière
+            if (angle >= 157.5 && angle <= 202.5) return Zone.D;     // gauche
+            if (angle > 292.5 && angle < 337.5) return Zone.E;     // avant-gauche
+            if (angle > 22.5 && angle < 67.5) return Zone.F;       // derrière-gauche
+            if (angle > 112.5 && angle < 157.5) return Zone.G;     // derrière-droite
+            return Zone.H;                                          // avant-droite
         }
     }
 

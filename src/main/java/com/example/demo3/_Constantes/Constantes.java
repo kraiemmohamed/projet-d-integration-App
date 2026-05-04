@@ -31,21 +31,11 @@ public final class Constantes {
     public static final Color LAMPE_COLOR_CLOSED = Color.gray(0.3);
     public static final Color LAMPE_COLOR_OPENED = Color.gray(0.85);
 
-    //Info camera (haut)
-    public static final Point2D POSITION_TEMPERATURE = new Point2D(SCREEN_WIDTH /20, HALF_HEIGHT /20);
-
-    public static final Point2D POSITION_HUMIDITE = new Point2D(SCREEN_WIDTH *19/20, HALF_HEIGHT /20);
-
-    public static final double IMAGE_WIDTH = SCREEN_WIDTH;
-    public static final double IMAGE_HEIGHT = HALF_HEIGHT;
-    public static final double IMAGE_X = (SCREEN_WIDTH/2)- IMAGE_WIDTH/2;
-    public static final double IMAGE_Y = (HALF_HEIGHT/2)- IMAGE_HEIGHT/2;
-
     // Connection indicator
     public static final double INDICATOR_RAYON = Math.min(SCREEN_WIDTH/20,HALF_HEIGHT/20);
     public static final Point2D INDICATOR_POSITION = new Point2D(SCREEN_WIDTH*0.99 - INDICATOR_RAYON, SCREEN_HEIGHT*0.99-INDICATOR_RAYON);
 
 
     // Misc
-    public static final int INTERVALLE_SEND = 100;
+    public static final int INTERVALLE_SEND = 100; //en ms, donc 10 fois/sec
 }

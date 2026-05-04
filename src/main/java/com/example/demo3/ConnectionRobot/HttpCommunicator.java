@@ -1,7 +1,6 @@
 package com.example.demo3.ConnectionRobot;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -27,12 +26,13 @@ public class HttpCommunicator {
         return IP;
     }
 
-    public void tryCommand() throws IOException, ConnectException, InterruptedException, IllegalArgumentException{
+    //
+    public void tryCommand() throws IOException, InterruptedException, IllegalArgumentException{
         sendCommand("S,0,false,P,");
     }
 
 
-    public void sendCommand(String command) throws IOException, ConnectException, InterruptedException {
+    public void sendCommand(String command) throws IOException, InterruptedException {
         if (commandURL == null) return;
 
         HttpRequest request = HttpRequest.newBuilder()

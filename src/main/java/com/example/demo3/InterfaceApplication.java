@@ -8,7 +8,6 @@ import com.example.demo3.ConnectionRobot.HttpCommunicator;
 import com.example.demo3.Haut.CameraRobot;
 import com.example.demo3._Constantes.Constantes;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
 import javafx.scene.paint.Color;
@@ -58,15 +57,6 @@ public class InterfaceApplication {
         camera.startStream(URL);
         startCommunicationThread();
     }
-
-//    public void initializeCommunication(String url) throws IOException, InterruptedException {
-//        communicator = new HttpCommunicator();
-//        startCommunicationThread();
-//    }
-//
-//    public void setCommunicatorURL(String URL) throws IOException, InterruptedException {
-//        communicator.setURL(URL);
-//    }
 
     private void startCommunicationThread() {
         Thread communicateur = new Thread(() -> {
@@ -146,8 +136,6 @@ public class InterfaceApplication {
     // SEND
     public void send() throws IOException, InterruptedException {
         communicator.sendCommand(sendZone().name() + "," + sendVitesse() + "," + sendEtatCompartiment() + "," + sendEtatLampe() + ",");
-//        System.out.println(sendZone().name() + "," + sendVitesse() + "," + sendEtatCompartiment() + "," + sendEtatLampe());
-//        System.out.println();
     }
 
     public Zone sendZone(){
@@ -176,9 +164,4 @@ public class InterfaceApplication {
                 Constantes.INDICATOR_RAYON*2,
                 Constantes.INDICATOR_RAYON*2);
     }
-
-//    //RECEIVE
-//    public void receive(Image image){
-//        camera.setParameters(image);
-//    }
 }

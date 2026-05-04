@@ -13,11 +13,7 @@ public class CameraRobot implements Affichable{
 
     public CameraRobot(){}
 
-    public void setParameters(Image img){
-        this.image = img;
-    }
-
-    public void startStream(String url) {
+    public void startStream(String url) { // Frame by frame
         Thread afficheurCamera = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 long tempsInitial = System.currentTimeMillis();
@@ -31,7 +27,6 @@ public class CameraRobot implements Affichable{
 
                     Thread.sleep(delay);
 
-//                    System.out.println("Frame time: " + deltaTemps);
                 } catch (Exception e) {
                     image = replacementImage;
                 }
