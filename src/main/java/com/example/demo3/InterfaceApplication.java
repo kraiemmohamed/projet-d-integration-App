@@ -35,11 +35,15 @@ public class InterfaceApplication {
         bouttonCompartiment = new BouttonApp(Constantes.COMPARTIMENT_COORDONNEES,
                 Constantes.COMPARTIMENT_DIMENSIONS,
                 Constantes.COMPARTIMENT_COLOR_CLOSED,
-                Constantes.COMPARTIMENT_COLOR_OPENED);
+                Constantes.COMPARTIMENT_COLOR_OPENED,
+                Constantes.COMPARTIMENT_IMAGE_CLOSED,
+                Constantes.COMPARTIMENT_IMAGE_CLOSED);
         bouttonLampe = new BouttonApp(Constantes.LAMPE_COORDONNEES,
                 Constantes.LAMPE_DIMENSIONS,
-                Constantes.LAMPE_COLOR_CLOSED,
-                Constantes.LAMPE_COLOR_OPENED);
+                Constantes.LAMPE_COLOR_OPENED,
+                Constantes.LAMPE_COLOR_OPENED,
+                Constantes.LAMPE_OPEN_IMAGE,
+                Constantes.LAMPE_CLOSED_IMAGE);
 
         this.communicator = communicator;
         URL = communicator.getIP();
@@ -153,7 +157,7 @@ public class InterfaceApplication {
 
     //AFFICHER
     public void afficherInterface(GraphicsContext gc){
-        gc.setFill(Color.WHITE);
+        gc.setFill(Constantes.DOWN_COULEUR);
         gc.fillRect(0,Constantes.HALF_HEIGHT, Constantes.SCREEN_WIDTH, Constantes.SCREEN_HEIGHT);
 
         for (var i : affichables) i.afficher(gc);

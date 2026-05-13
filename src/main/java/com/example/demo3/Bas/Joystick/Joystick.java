@@ -76,7 +76,7 @@ public class Joystick extends Boutton implements Affichable {
 
     @Override
     public void afficher(GraphicsContext gc) {
-        gc.setFill(active? Constantes.JOYSTICK_COULEUR : Color.WHITE);
+        gc.setFill(active? Constantes.JOYSTICK_COULEUR_APPUYE : Constantes.JOYSTICK_COULEUR_LACHE);
         gc.fillOval(position.getX() - rayon, position.getY() - rayon, 2*rayon,2*rayon);
 
         gc.setStroke(Color.BLACK);

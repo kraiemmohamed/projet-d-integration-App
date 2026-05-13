@@ -38,7 +38,7 @@ public class CameraRobot implements Affichable{
     }
 
     public void afficher(GraphicsContext gc){
-        gc.setFill(Color.GRAY);
+        gc.setFill(Constantes.UP_COULEUR);
         gc.fillRect(0,0, Constantes.SCREEN_WIDTH, Constantes.HALF_HEIGHT);
         Image img = image;
         if (img == null || img.getHeight() == 0 || img.getWidth() == 0) img = replacementImage;

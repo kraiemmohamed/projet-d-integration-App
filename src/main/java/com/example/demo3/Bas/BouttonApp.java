@@ -1,38 +1,38 @@
 package com.example.demo3.Bas;
 
 import com.example.demo3.Affichable;
+import com.example.demo3._Constantes.Constantes;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 public class BouttonApp extends Boutton implements Affichable {
-    final Rectangle boutton;
-
     double largeur;
     double hauteur;
 
     Color couleurFerme;
     Color couleurOuvert;
 
-    public BouttonApp(Point2D position, Point2D dimensions){
+    Image imgOuvert;
+    Image imgFerme;
+
+    public BouttonApp(Point2D position, Point2D dimensions, Image img){
         this.position = position;
         largeur = dimensions.getX();
         hauteur = dimensions.getY();
         couleurFerme = Color.RED;
         couleurOuvert = Color.GREEN;
-
-        this.boutton = new Rectangle(position.getX(),position.getY(), dimensions.getX(),dimensions.getY());
     }
 
-    public BouttonApp(Point2D position, Point2D dimensions, Color closed, Color opened){
+    public BouttonApp(Point2D position, Point2D dimensions, Color closed, Color opened, Image ouvert, Image ferme){
         this.position = position;
         largeur = dimensions.getX();
         hauteur = dimensions.getY();
         couleurFerme = closed;
         couleurOuvert = opened;
-
-        this.boutton = new Rectangle(position.getX(),position.getY(), dimensions.getX(),dimensions.getY());
+        imgOuvert = ouvert;
+        imgFerme = ferme;
     }
 
     public boolean getActive(){
@@ -61,9 +61,21 @@ public class BouttonApp extends Boutton implements Affichable {
     @Override
     public void afficher(GraphicsContext gc) {
         gc.setFill(getActive()? couleurOuvert : couleurFerme);
-        gc.fillRect(position.getX(), position.getY(), largeur, hauteur);
+        gc.fillRoundRect(position.getX(),
+                position.getY(),
+                largeur, hauteur,
+                largeur* Constantes.ARRONDISSEMENT_BOUTTON_HORIZONTAL,
+                hauteur*Constantes.ARRONDISSEMENT_BOUTTON_VERTICAL);
 
         gc.setStroke(Color.BLACK);
-        gc.strokeRect(position.getX(), position.getY(), largeur, hauteur);
+        gc.strokeRoundRect(position.getX(),
+                position.getY(),
+                largeur, hauteur,
+                largeur* Constantes.ARRONDISSEMENT_BOUTTON_HORIZONTAL,
+                hauteur*Constantes.ARRONDISSEMENT_BOUTTON_VERTICAL);
+
+
+        gc.drawImage(getActive()? imgOuvert:imgFerme,
+                position.getX(), position.getY(), largeur, hauteur);
     }
 }
