@@ -1,5 +1,6 @@
 # Projet-d-integration
 Interface d'application permettant de contrôler à distance le robot:
+
 <img width="403" height="228" alt="image" src="https://github.com/user-attachments/assets/a073fbec-98af-4790-9eb4-674755da7a92" />
 
 Au lancement de l'application, il y aurait une page vous permettant d'entrer l'adresse IP afin de se connecter au robot. Entrez l'adresse IP fournis par l'application de détection de visage (ex: 192.168.1.134) afin de s'y connecter et de pouvoir le contrôler (note: il faut être connecté au même résaux wifi que le robot).
