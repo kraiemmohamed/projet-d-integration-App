@@ -17,7 +17,7 @@ public final class Constantes {
     public static final Point2D JOYSTICK_CENTER = new Point2D(SCREEN_WIDTH /2, HALF_HEIGHT+(SCREEN_HEIGHT-HALF_HEIGHT)/2);
     public static final double JOYSTICK_RAYON = Math.min(SCREEN_WIDTH /3, HALF_HEIGHT/3);
     public static final Color JOYSTICK_COULEUR_APPUYE = Color.ORANGE;
-    public static final Color JOYSTICK_COULEUR_LACHE = Color.gray(0.7);
+    public static final Color JOYSTICK_COULEUR_LACHE = Color.gray(0.6);
     //Curseur
     public static final double RAYON_CURSEUR = JOYSTICK_RAYON /3;
     public static final Color CURSEUR_COULEUR = Color.gray(0.2);
@@ -37,7 +37,7 @@ public final class Constantes {
     public static final Point2D LAMPE_DIMENSIONS = new Point2D(SCREEN_WIDTH/4, HALF_HEIGHT/4);
     public static final Point2D LAMPE_COORDONNEES = new Point2D(0, HALF_HEIGHT);
     public static final Color LAMPE_COLOR_CLOSED = Color.gray(0.3);
-    public static final Color LAMPE_COLOR_OPENED = Color.gray(0.7);
+    public static final Color LAMPE_COLOR_OPENED = Color.gray(0.6);
     public static final Image LAMPE_OPEN_IMAGE = new Image("Lampe_Ouverte.png");
     public static final Image LAMPE_CLOSED_IMAGE = new Image("Lampe_Closed.png");
 
