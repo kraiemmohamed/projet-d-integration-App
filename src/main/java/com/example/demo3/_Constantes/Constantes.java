@@ -30,8 +30,8 @@ public final class Constantes {
     public static final Color COMPARTIMENT_COLOR_OPENED = Color.GREEN;
     public static final double ARRONDISSEMENT_BOUTTON_HORIZONTAL = 0.33;
     public static final double ARRONDISSEMENT_BOUTTON_VERTICAL = 0.33;
-    public static final Image COMPARTIMENT_IMAGE_CLOSED = new Image("Locker_closed.png");
-    // trouver image boite
+    public static final Image COMPARTIMENT_IMAGE_CLOSED = new Image("Locker_closed(1).png");
+    public static final Image COMPARTIMENT_IMAGE_OPEN = new Image("Locker_open.png");
 
     //Boutton Lampe
     public static final Point2D LAMPE_DIMENSIONS = new Point2D(SCREEN_WIDTH/4, HALF_HEIGHT/4);

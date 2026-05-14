@@ -36,7 +36,7 @@ public class InterfaceApplication {
                 Constantes.COMPARTIMENT_DIMENSIONS,
                 Constantes.COMPARTIMENT_COLOR_CLOSED,
                 Constantes.COMPARTIMENT_COLOR_OPENED,
-                Constantes.COMPARTIMENT_IMAGE_CLOSED,
+                Constantes.COMPARTIMENT_IMAGE_OPEN,
                 Constantes.COMPARTIMENT_IMAGE_CLOSED);
         bouttonLampe = new BouttonApp(Constantes.LAMPE_COORDONNEES,
                 Constantes.LAMPE_DIMENSIONS,
