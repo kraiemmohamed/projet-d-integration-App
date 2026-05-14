@@ -26,7 +26,7 @@ public final class Constantes {
     //Boutton Compartiment
     public static final Point2D COMPARTIMENT_DIMENSIONS = new Point2D(SCREEN_WIDTH /4, HALF_HEIGHT /4);
     public static final Point2D COMPARTIMENT_COORDONNEES = new Point2D(SCREEN_WIDTH - COMPARTIMENT_DIMENSIONS.getX(), HALF_HEIGHT);
-    public static final Color COMPARTIMENT_COLOR_CLOSED = Color.RED;
+    public static final Color COMPARTIMENT_COLOR_CLOSED = Color.ORANGE;
     public static final Color COMPARTIMENT_COLOR_OPENED = Color.GREEN;
     public static final double ARRONDISSEMENT_BOUTTON_HORIZONTAL = 0.33;
     public static final double ARRONDISSEMENT_BOUTTON_VERTICAL = 0.33;
